@@ -44,7 +44,19 @@ public class TileManager {
 		
 		for (int i = 0; i < mapTileNum.length; i++) {
 			for (int j = 0; j < mapTileNum[i].length; j++) {
-				g2.drawImage(tile[mapTileNum[i][j]].image, i*gp.tileSize, j*gp.tileSize, gp.tileSize, gp.tileSize, null);
+				
+				int worldX = i*gp.tileSize;
+				int worldY = j*gp.tileSize;
+				int screenX = worldX - gp.player.worldX + gp.player.screenX;
+				int screenY = worldY - gp.player.worldY + gp.player.screenY;
+				
+				if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
+						worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+						worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+						worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+					g2.drawImage(tile[mapTileNum[i][j]].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+				}
+				
 			}
 		}
 	}
@@ -55,6 +67,7 @@ public class TileManager {
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			for (int i = 0; i < gp.maxWorldCol; i++) {
 				String line = br.readLine();
+				
 				
 				String[] numbers = line.split(" ");
 				for (int j = 0; j < gp.maxWorldRow; j++) { 
