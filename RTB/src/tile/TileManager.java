@@ -49,7 +49,7 @@ public class TileManager {
 	}
 	
 	public void draw(Graphics2D g2) {
-		loadMap("/maps/map01.txt");
+		loadMap("/maps/map02.csv");
 		
 		for (int i = 0; i < mapTileNum.length; i++) {
 			for (int j = 0; j < mapTileNum[i].length; j++) {
@@ -78,7 +78,7 @@ public class TileManager {
 				String line = br.readLine();
 				
 				
-				String[] numbers = line.split(" ");
+				String[] numbers = line.split(",");
 				for (int j = 0; j < gp.maxWorldRow; j++) { 
 					int num = Integer.parseInt(numbers[j]);
 					mapTileNum[i][j] = num;
