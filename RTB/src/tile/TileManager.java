@@ -74,14 +74,14 @@ public class TileManager {
 		try {
 			InputStream is = getClass().getResourceAsStream(filePath);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-			for (int i = 0; i < gp.maxWorldCol; i++) {
+			for (int i = 0; i < gp.maxWorldRow; i++) {
 				String line = br.readLine();
 				
 				
 				String[] numbers = line.split(",");
-				for (int j = 0; j < gp.maxWorldRow; j++) { 
+				for (int j = 0; j < gp.maxWorldCol; j++) { 
 					int num = Integer.parseInt(numbers[j]);
-					mapTileNum[i][j] = num;
+					mapTileNum[j][i] = num;
 				}
 				
 			}
