@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
   public Player player = new Player(this, kh);
   TileManager tm = new TileManager(this);
   public SuperObject[] objects = new SuperObject[1];
+  public SuperObject[] inventory = new SuperObject[50];
   AssetSetter as = new AssetSetter(this);
 
   public GamePanel() {
@@ -93,9 +94,14 @@ public class GamePanel extends JPanel implements Runnable {
     Graphics2D g2 = (Graphics2D)g;
     tm.draw(g2);
     player.draw(g2);
-    for (SuperObject o : objects) {
-    	o.draw(g2, this);
+    for (int i = 0; i < objects.length; i++) {
+    	if (objects[i] == null) {
+    		continue;
+    	}
+    	objects[i].draw(g2, this);
+    	cChecker.checkObject(player, i);
     }
+    
     
 
     g2.dispose();

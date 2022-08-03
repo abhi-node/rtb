@@ -1,12 +1,29 @@
 package main;
 
 import entity.Entity;
+import object.SuperObject;
 
 public class CollisionChecker {
 	GamePanel gp;
 	
 	public CollisionChecker(GamePanel gp) {
 		this.gp = gp;
+	}
+	
+	public void checkObject(Entity entity, int index) {
+		int entityLeftWorldX = entity.worldX + entity.solidArea.x;
+		int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;
+		int entityBottomWorldY = entity.worldY + entity.solidArea.y;
+		int entityTopWorldY = entity.worldY + entity.solidArea.y + entity.solidArea.height;
+		
+		if (gp.objects[index].worldX < entityRightWorldX 
+				&& gp.objects[index].worldY < entityTopWorldY 
+				&& gp.objects[index].worldX+gp.tileSize > entityLeftWorldX 
+				&& gp.objects[index].worldY+gp.tileSize > entityBottomWorldY) {
+			gp.inventory[index] = gp.objects[index];
+			gp.objects[index] = null;
+			
+		}
 	}
 	
 	public void checkTile(Entity entity) {
