@@ -8,6 +8,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import entity.NPC_OldMan;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -33,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
   Thread gameThread;
   public CollisionChecker cChecker = new CollisionChecker(this);
   public Player player = new Player(this, kh);
+  public NPC_OldMan npc1 = new NPC_OldMan(this);
   TileManager tm = new TileManager(this);
   public SuperObject[] objects = new SuperObject[1];
   public SuperObject[] inventory = new SuperObject[50];
@@ -86,6 +88,7 @@ public class GamePanel extends JPanel implements Runnable {
   
   public void update() {
     player.update();
+    npc1.update();
   }
 
   public void paintComponent(Graphics g) {
@@ -94,6 +97,7 @@ public class GamePanel extends JPanel implements Runnable {
     Graphics2D g2 = (Graphics2D)g;
     tm.draw(g2);
     player.draw(g2);
+    npc1.draw(g2);
     for (int i = 0; i < objects.length; i++) {
     	if (objects[i] == null) {
     		continue;
